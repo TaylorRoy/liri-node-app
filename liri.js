@@ -1,8 +1,13 @@
 require("dotenv").config();
+var Spotify = require('node-spotify-api');
 var request = require("request");
 var fs = require("fs");
+var keys = require("./keys");
 
-//var spotify = new Spotify(keys.spotify);
+
+var spotify = new Spotify(keys.spotify);
+console.log(spotify);
+
 
 var nodeArray = process.argv;
 console.log("nodeArray = " + nodeArray);
@@ -28,9 +33,9 @@ if (nodeArray[2] === "spotify-this-song") {
 //bandsintown- concert information
 //need to get specific info from body- venue, venue location, date(MM,DD,YYYY)
 if (nodeArray[2] === "concert-this") {
-    console.log("concert-this is running")
+    // console.log("concert-this is running")
     var concertSearch = nodeArray[3].replace("-", "%20");
-    console.log(concertSearch);
+    // console.log(concertSearch);
 
     request("https://rest.bandsintown.com/artists/" + concertSearch + "/events?app_id=codingbootcamp", function (error, response, body) {
         if (error) {
@@ -38,8 +43,11 @@ if (nodeArray[2] === "concert-this") {
         }
         // console.log(response);
         // console.log(JSON.stringify(response));
-        console.log(JSON.parse(body));
-        console.log("length: " + body.length);
+         console.log(JSON.parse(body));
+        console.log("Venue: " + JSON.parse(body)[0].venue.name);
+        console.log("Location: " + JSON.parse(body)[0].venue.city)
+        console.log("Region: " + JSON.parse(body)[0].venue.city);
+        console.log("Date: " + JSON.parse(body)[0].datetime);
     })
 
 }
