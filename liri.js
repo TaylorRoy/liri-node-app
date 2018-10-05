@@ -7,6 +7,9 @@ var keys = require("./keys");
 
 var spotify = new Spotify(keys.spotify);
 console.log(spotify);
+console.log("ID: " + spotify.credentials.id);
+console.log("Secret: " + spotify.credentials.secret);
+
 
 
 var nodeArray = process.argv;
@@ -16,19 +19,23 @@ console.log("nodeArray[3] = " + nodeArray[3]);
 
 // spotify API- song information
 if (nodeArray[2] === "spotify-this-song") {
-    console.log("spotify-this-song is running")
-    fs.readFile(".env", "utf8", function (error, data) {
-        // If an error was experienced we will log it.
+
+    spotify.request('https://api.spotify.com/v1/search?q=' + nodeArray[3]+ "&offset=0&limit=1&type=track", function (error, response, body) {
         if (error) {
-            console.log(error);
+            console.log("spotify error");
         }
-        console.log(data);
-        // curl -X "GET" "https://api.spotify.com/v1/search?type=songnamehere&limit=10" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer <OAuth Token here>"
+        else{
+
+            console.log("no error on request");
+            console.log(JSON.stringify(response.tracks.items[0].name, null, 2));
+            console.log(JSON.stringify(body));
+        }
+
 
     })
 }
 
-  
+
 
 //bandsintown- concert information
 //need to get specific info from body- venue, venue location, date(MM,DD,YYYY)
@@ -36,6 +43,7 @@ if (nodeArray[2] === "concert-this") {
     // console.log("concert-this is running")
     var concertSearch = nodeArray[3].replace("-", "%20");
     // console.log(concertSearch);
+    
 
     request("https://rest.bandsintown.com/artists/" + concertSearch + "/events?app_id=codingbootcamp", function (error, response, body) {
         if (error) {
@@ -43,7 +51,7 @@ if (nodeArray[2] === "concert-this") {
         }
         // console.log(response);
         // console.log(JSON.stringify(response));
-         console.log(JSON.parse(body));
+        console.log(JSON.parse(body));
         console.log("Venue: " + JSON.parse(body)[0].venue.name);
         console.log("Location: " + JSON.parse(body)[0].venue.city)
         console.log("Region: " + JSON.parse(body)[0].venue.city);
@@ -74,7 +82,7 @@ if (nodeArray[2] === "movie-this") {
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
             console.log("Language: " + JSON.parse(body).Language);
-           //console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
+            //console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
             // console.log("The movie's rating is: " + JSON.parse(body).Title);
 
         }
@@ -89,34 +97,37 @@ if (nodeArray[2] === "movie-this") {
                 console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
                 console.log("Language: " + JSON.parse(body).Language);
                 console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
-                
+
 
             });
         }
     })
 }
-    //read random.txt file
-    if (nodeArray[2] === "do-what-it-says") { 
-        console.log("do-what-it-says is running")
+//read random.txt file
+if (nodeArray[2] === "do-what-it-says") {
+    console.log("do-what-it-says is running")
     fs.readFile("random.txt", "utf8", function (error, data) {
         // If an error was experienced we will log it.
         if (error) {
             console.log(error);
-        }  
-       
-            console.log(data.split(","));
-            var bandArray = data.split(",");
-            var band = bandArray[1];
-            console.log("band: " + band);
-            request("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp", function (error, response, body) {
-        if (error) {
-            console.log("bands in town = error")
         }
-        console.log("WORKED!!!");
-        //  console.log(response);
-        // // console.log(JSON.stringify(response));
-        // console.log(body);
-        // console.log("length: " + body.length);
+
+        console.log(data.split(","));
+        var bandArray = data.split(",");
+        var band = bandArray[1];
+        console.log("band: " + band);
+        spotify.request('https://api.spotify.com/v1/search?q=' + nodeArray[3]+ "&offset=0&limit=1&type=track", function (error, response, body) {
+        if (error) {
+            console.log("do-what-it-says error");
+        }
+        else{
+
+            console.log("no error on do-what-it-says request");
+            console.log(JSON.stringify(response.tracks.items[0].name, null, 2));
+            console.log(JSON.stringify(body));
+        }
+
+
     })
     })
 }
