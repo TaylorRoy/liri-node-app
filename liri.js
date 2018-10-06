@@ -125,33 +125,33 @@ if (nodeArray[2] === "movie-this") {
             console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
             console.log("-------------------------------------------");
         })
-    }
+    } 
+}
 
-    //read random.txt file
-    if (nodeArray[2] === "do-what-it-says") {
-        console.log("do-what-it-says is running")
-        fs.readFile("random.txt", "utf8", function (error, data) {
-            // If an error was experienced we will log it.
+//read random.txt file
+if (nodeArray[2] === "do-what-it-says") {
+    console.log("do-what-it-says is running")
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        // If an error was experienced we will log it.
+        if (error) {
+            console.log(error);
+        }
+
+        console.log(data.split(","));
+        var bandArray = data.split(",");
+        var band = bandArray[1];
+        // console.log("band: " + band);
+        spotify.request('https://api.spotify.com/v1/search?q=' + nodeArray[3] + "&offset=0&limit=1&type=track", function (error, response, body) {
             if (error) {
-                console.log(error);
+                console.log("do-what-it-says = error");
             }
+            else {
 
-            console.log(data.split(","));
-            var bandArray = data.split(",");
-            var band = bandArray[1];
-            // console.log("band: " + band);
-            spotify.request('https://api.spotify.com/v1/search?q=' + nodeArray[3] + "&offset=0&limit=1&type=track", function (error, response, body) {
-                if (error) {
-                    console.log("do-what-it-says = error");
-                }
-                else {
-
-                    console.log("-------------------------------------------");
-                    console.log(JSON.stringify(response.tracks.items[0].name, null, 2));
-                    console.log(JSON.stringify(body));
-                    console.log("-------------------------------------------");
-                }
-            })
+                console.log("-------------------------------------------");
+                console.log(JSON.stringify(response.tracks.items[0].name, null, 2));
+                console.log(JSON.stringify(body));
+                console.log("-------------------------------------------");
+            }
         })
-    }
+    })
 }
