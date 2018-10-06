@@ -56,24 +56,7 @@ no error on request
   "tracks": {
     "href": "https://api.spotify.com/v1/search?query=famous&type=track&offset=0&
 limit=1",
-    "items": [
-      {
-        "album": {
-          "album_type": "album",
-          "artists": [
-            {
-              "external_urls": {
-                "spotify": "https://open.spotify.com/artist/55Aa2cqylxrFIXC767Z8
-65"
-              },
-              "href": "https://api.spotify.com/v1/artists/55Aa2cqylxrFIXC767Z865
-",
-              "id": "55Aa2cqylxrFIXC767Z865",
-              "name": "Lil Wayne",
-              "type": "artist",
-              "uri": "spotify:artist:55Aa2cqylxrFIXC767Z865"
-            }
-          ],
+    "items": [{"album": {"album_type": "album","artists": [{"external_urls": {"spotify": "https://open.spotify.com/artist/55Aa2cqylxrFIXC767Z865"},"href": "https://api.spotify.com/v1/artists/55Aa2cqylxrFIXC767Z865", "id": "55Aa2cqylxrFIXC767Z865","name": "Lil Wayne","type": "artist","uri": "spotify:artist:55Aa2cqylxrFIXC767Z865"}],
           "available_markets": [
             "AD",
             "AR",
@@ -149,20 +132,17 @@ limit=1",
           "images": [
             {
               "height": 640,
-              "url": "https://i.scdn.co/image/15f95fb58aab0ef346f5241283f8ae955f
-f1226e",
+              "url": "https://i.scdn.co/image/15f95fb58aab0ef346f5241283f8ae955ff1226e",
               "width": 640
             },
             {
               "height": 300,
-              "url": "https://i.scdn.co/image/ae5aefe1b24bbeba9a25e243650171005e
-fc061b",
+              "url": "https://i.scdn.co/image/ae5aefe1b24bbeba9a25e243650171005efc061b",
               "width": 300
             },
             {
               "height": 64,
-              "url": "https://i.scdn.co/image/22a1726b0dc261c73b3b71059a027c0868
-c6d6f4",
+              "url": "https://i.scdn.co/image/22a1726b0dc261c73b3b71059a027c0868c6d6f4",
               "width": 64
             }
           ],
@@ -176,8 +156,7 @@ c6d6f4",
         "artists": [
           {
             "external_urls": {
-              "spotify": "https://open.spotify.com/artist/55Aa2cqylxrFIXC767Z865
-"
+              "spotify": "https://open.spotify.com/artist/55Aa2cqylxrFIXC767Z865"
             },
             "href": "https://api.spotify.com/v1/artists/55Aa2cqylxrFIXC767Z865",
 
@@ -188,8 +167,7 @@ c6d6f4",
           },
           {
             "external_urls": {
-              "spotify": "https://open.spotify.com/artist/66jpZDjMcxF3SfDfwK7GXe
-"
+              "spotify": "https://open.spotify.com/artist/66jpZDjMcxF3SfDfwK7GXe"
             },
             "href": "https://api.spotify.com/v1/artists/66jpZDjMcxF3SfDfwK7GXe",
 
