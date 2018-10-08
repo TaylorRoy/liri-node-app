@@ -125,7 +125,7 @@ if (nodeArray[2] === "movie-this") {
             console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
             console.log("-------------------------------------------");
         })
-    } 
+    }
 }
 
 //read random.txt file
@@ -137,19 +137,20 @@ if (nodeArray[2] === "do-what-it-says") {
             console.log(error);
         }
 
-        console.log(data.split(","));
+        // console.log("bandArraY: " + data.split(","));
         var bandArray = data.split(",");
         var band = bandArray[1];
         // console.log("band: " + band);
-        spotify.request('https://api.spotify.com/v1/search?q=' + nodeArray[3] + "&offset=0&limit=1&type=track", function (error, response, body) {
+        spotify.request('https://api.spotify.com/v1/search?q=' + bandArray[1] + "&offset=0&limit=1&type=track", function (error, response, body) {
             if (error) {
-                console.log("do-what-it-says = error");
+                console.log("do-what-it-says error");
             }
             else {
-
                 console.log("-------------------------------------------");
-                console.log(JSON.stringify(response.tracks.items[0].name, null, 2));
-                console.log(JSON.stringify(body));
+                console.log("Track Name: " + JSON.stringify(response.tracks.items[0].name, null, 2));
+                console.log("Artist: " + JSON.stringify(response.tracks.items[0].album.artists[0].name, null, 2));
+                console.log("Album Name: " + JSON.stringify(response.tracks.items[0].album.name, null, 2));
+                console.log("Preview URL: " + JSON.stringify(response.tracks.items[0].preview_url, null, 2));
                 console.log("-------------------------------------------");
             }
         })
